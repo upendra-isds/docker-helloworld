@@ -1,4 +1,4 @@
 steps:
   - script: |
-      docker build -f ./Dockerfile
+      docker build -f ./Dockerfile .
     displayName: 'Docker Build'
