@@ -19,6 +19,8 @@ jobs:
   steps:
   - script: sudo apt-get install git
   - script: sudo apt-get install ansible
+  - script: ansible --version
+  - script: which ansible
   
 - job: always
   steps:
