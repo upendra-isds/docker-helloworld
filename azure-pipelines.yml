@@ -11,13 +11,13 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - template: azure-pipelines-steps.yml
+  - template: azure-pipelines-step.yml
 
 - job: WindowsDockerBuild
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-  - template: azure-pipelines-steps.yml
+  - template: azure-pipelines-step.yml
 
 - job: always
   steps:
