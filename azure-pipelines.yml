@@ -9,11 +9,28 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+- job: DockerHelloWorldPrep
+  steps:
+  - script: echo Preparing to build Hello world docker!
+    displayName: 'DockerHelloWorld Preparation'
+    
+- job: Docker Build
+  steps:
+  - script: docker build -f ./Dockerfile
+    displayName: 'Docker Build'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- job: always
+  steps:
+  - script: echo "The build has finished"
+    condition: always()
+
+- job: success
+  steps:
+  - script: echo "Hurrah!!!!! The build succeeded"
+    condition: succeeded()
+
+- job: failed
+  steps:
+  - script: echo "The build failed - Please fix it"
+    condition: failed()
