@@ -11,6 +11,8 @@ pool:
 
   jobs:
   - job: DockerHelloWorldPrep
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
     - script: echo Preparing to build Hello world docker!
       displayName: 'DockerHelloWorld Preparation'
