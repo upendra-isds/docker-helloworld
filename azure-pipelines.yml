@@ -7,18 +7,19 @@ trigger:
 - master
 
 jobs:
-- job: LinuxDockerBuild
+- job: DockerBuild
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
   - template: azure-pipelines-step.yml
 
-- job: WindowsDockerBuild
+- job: InstallPython
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'ubuntu-16.04'
   steps:
-  - template: azure-pipelines-step.yml
-
+  - script: sudo apt-get install pip3
+  - script: pip3 install python
+  
 - job: always
   steps:
   - script: echo "The build has finished"
