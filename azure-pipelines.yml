@@ -6,33 +6,30 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+- job: LinuxDockerBuild
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - template: azure-pipelines-steps.yml
 
-  jobs:
-  - job: DockerHelloWorldPrep
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - script: echo Preparing to build Hello world docker!
-      displayName: 'DockerHelloWorld Preparation'
-    
-  - job: Docker Build
-    steps:
-    - script: docker build -f ./Dockerfile
-      displayName: 'Docker Build'
+- job: WindowsDockerBuild
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - template: azure-pipelines-steps.yml
 
-  - job: always
-    steps:
-    - script: echo "The build has finished"
-      condition: always()
+- job: always
+  steps:
+  - script: echo "The build has finished"
+    condition: always()
 
-  - job: success
-    steps:
-    - script: echo "Hurrah!!!!! The build succeeded"
-      condition: succeeded()
+- job: success
+  steps:
+  - script: echo "Hurrah!!!!! The build succeeded"
+    condition: succeeded()
 
-  - job: failed
-    steps:
-    - script: echo "The build failed - Please fix it"
-      condition: failed()
+- job: failed
+  steps:
+  - script: echo "The build failed - Please fix it"
+    condition: failed()
